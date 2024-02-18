@@ -8,7 +8,7 @@ model_dict = pickle.load(open('./model.p', 'rb'))
 model = model_dict['model']
 
 # Initialize video capture
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(0)
 
 # Initialize Mediapipe
 mp_hands = mp.solutions.hands
@@ -75,6 +75,9 @@ while True:
 
         #Draw the pedicted letter on top of the hand symbol
         predicted_character = labels_dict[int(prediction[0])]
+        
+        print("Predicted Letter:", labels_dict[int(prediction[0])])
+
 
         cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 0, 0), 4)
         cv2.putText(frame, predicted_character, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 1.3, (0, 0, 0), 3,
